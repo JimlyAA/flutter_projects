@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/detail': (context) => const DetailScreen(data: 'Hello from Home!'),
         '/settings': (context) => const SettingsScreen(username: 'Guest'),
+        '/about': (context) => const AboutScreen(), // ✅ Tambahan route AboutScreen
       },
     );
   }
@@ -41,7 +42,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Tombol untuk navigasi dasar
+            // Tombol untuk navigasi dasar (push)
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -73,13 +74,25 @@ class HomeScreen extends StatelessWidget {
             // Tombol untuk named route ke SettingsScreen
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/settings', arguments: 'John Doe');
+                Navigator.pushNamed(context, '/settings', arguments: 'Jimly');
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 textStyle: const TextStyle(fontSize: 16),
               ),
               child: const Text('Go to Settings'),
+            ),
+            const SizedBox(height: 20),
+            // ✅ Tombol ke AboutScreen
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/about');
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                textStyle: const TextStyle(fontSize: 16),
+              ),
+              child: const Text('Go to About'),
             ),
           ],
         ),
@@ -128,7 +141,7 @@ class DetailScreen extends StatelessWidget {
   }
 }
 
-// Layar Pengaturan (SettingsScreen) - Tugas Tambahan
+// Layar Pengaturan (SettingsScreen)
 class SettingsScreen extends StatelessWidget {
   final String username;
 
@@ -136,7 +149,6 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mendapatkan argumen tambahan jika dikirim melalui pushNamed
     final args = ModalRoute.of(context)?.settings.arguments as String? ?? username;
 
     return Scaffold(
@@ -165,6 +177,28 @@ class SettingsScreen extends StatelessWidget {
               child: const Text('Go Back'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ✅ Layar Tentang (AboutScreen)
+class AboutScreen extends StatelessWidget {
+  const AboutScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('About Screen'),
+        centerTitle: true,
+      ),
+      body: const Center(
+        child: Text(
+          'This is the About Screen.\nMade by Jimly 💡',
+          style: TextStyle(fontSize: 18),
+          textAlign: TextAlign.center,
         ),
       ),
     );

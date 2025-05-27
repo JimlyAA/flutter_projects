@@ -47,11 +47,13 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SetupFlowScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const SetupFlowScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 textStyle: const TextStyle(fontSize: 16),
               ),
               child: const Text('Start Setup Flow'),
@@ -107,7 +109,15 @@ class _SetupFlowScreenState extends State<SetupFlowScreen> {
               page = FindDevicesScreen(onDeviceFound: _onDeviceFound);
               break;
             case 'connect_device':
-              page = ConnectDeviceScreen(onSetupComplete: () => _completeSetup(context));
+              page = ConnectDeviceScreen(
+                onNext: () =>
+                    _navigatorKey.currentState!.pushNamed('confirm_device'),
+              );
+              break;
+            case 'confirm_device':
+              page = ConfirmDeviceScreen(
+                onConfirm: () => _completeSetup(context),
+              );
               break;
             default:
               page = FindDevicesScreen(onDeviceFound: _onDeviceFound);
@@ -152,9 +162,9 @@ class FindDevicesScreen extends StatelessWidget {
 
 // Layar Koneksi Perangkat (ConnectDeviceScreen)
 class ConnectDeviceScreen extends StatelessWidget {
-  final VoidCallback onSetupComplete;
+  final VoidCallback onNext;
 
-  const ConnectDeviceScreen({super.key, required this.onSetupComplete});
+  const ConnectDeviceScreen({super.key, required this.onNext});
 
   @override
   Widget build(BuildContext context) {
@@ -168,12 +178,12 @@ class ConnectDeviceScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: onSetupComplete,
+            onPressed: onNext,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
               textStyle: const TextStyle(fontSize: 16),
             ),
-            child: const Text('Complete Setup'),
+            child: const Text('Continue to Confirm'),
           ),
           const SizedBox(height: 10),
           ElevatedButton(
@@ -185,6 +195,37 @@ class ConnectDeviceScreen extends StatelessWidget {
               textStyle: const TextStyle(fontSize: 16),
             ),
             child: const Text('Back'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Layar Konfirmasi Perangkat (ConfirmDeviceScreen)
+class ConfirmDeviceScreen extends StatelessWidget {
+  final VoidCallback onConfirm;
+
+  const ConfirmDeviceScreen({super.key, required this.onConfirm});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Confirm Device Setup',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: onConfirm,
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              textStyle: const TextStyle(fontSize: 16),
+            ),
+            child: const Text('Confirm & Finish'),
           ),
         ],
       ),
