@@ -79,3 +79,27 @@ Navigasi ini menggunakan pendekatan Router API (Declarative Navigation) dengan k
 ### Screenshots
 ![Screenshot_20250527_200216](https://github.com/user-attachments/assets/72de7797-e377-40d8-b9b0-26cac7cf5975)
 ![Screenshot_20250527_200226](https://github.com/user-attachments/assets/cfaf9f4b-9b33-4900-80eb-6b80fc3170e5)
+
+## Cara Menjalankan Aplikasi di Android Studio
+
+Berikut langkah-langkah untuk menjalankan aplikasi Flutter di Android Studio:
+
+1. **Buka Android Studio**  
+   Jalankan Android Studio di komputermu.
+
+2. **Buka Proyek Flutter**  
+   Klik `File > Open`, lalu pilih folder Flutter_projects.
+
+3. **Pastikan Emulator atau Perangkat Fisik Tersambung**  
+   - Jalankan emulator dari Android Studio, atau  
+   - Hubungkan HP Android ke laptop dan aktifkan *USB debugging*.
+
+4. **Jalankan Aplikasi**  
+   Tekan tombol `Run` (ikon ▶️ hijau di toolbar), atau gunakan shortcut:
+   - Windows/Linux: `Shift + F10`
+   - macOS: `Control + R`
+
+5. **Selesai!**  
+   Aplikasi akan terinstal dan dijalankan pada emulator atau perangkat yang dipilih.
+
+---
